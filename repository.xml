@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>racket-overlay</name>
+    <description lang="en">Racket overlay to include missing ebuilds from Portage.</description>
+    <homepage>https://github.com/lehitoskin/racket-overlay</homepage>
+    <owner type="project">
+		<email>lehi@tosk.in</email>
+		<name>lehitoskin</name>
+    </owner>
+    <source type="git">git://github.com/lehitoskin/racket-overlay.git</source>
+    <feed>https://github.com/lehitoskin/racket-overlay/commits/master.atom</feed>
+  </repo>
+</repositories>
