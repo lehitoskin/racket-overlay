@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-scheme/racket/racket-6.1.1.ebuild,v 1.2 2014/08/10 21:25:26 slyfox Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,6 +12,7 @@ inherit eutils pax-utils
 DESCRIPTION="Racket is a general-purpose programming language with strong support for domain-specific languages"
 HOMEPAGE="http://racket-lang.org/"
 SRC_URI="minimal? ( http://download.racket-lang.org/installers/${PV}/${PN}-minimal-${PV}-src-builtpkgs.tgz ) !minimal? ( http://download.racket-lang.org/installers/${PV}/${P}-src-builtpkgs.tgz )"
+#SRC_URI="http://pre.racket-lang.org/installers/plt-${PV}-src-unix.tgz"
 EGIT_REPO_URI="git://git.racket-lang.org/plt.git"
 
 LICENSE="LGPL-2.1"
@@ -60,10 +61,11 @@ src_compile() {
 }
 
 src_install() {
+	emake DESTDIR="${D}" install
+
 	#racket now comes with desktop files, but DESTDIR is mishandled
 	for f in /usr/share/applications/{drracket,slideshow}.desktop; do
-		sed -ie "s|${D}||" "${D}/${f}"
+		sed -e "s|${D}||g" \
+			-i "${D}/${f}" || die "Failed to patch '${f}'"
 	done
-
-	emake DESTDIR="${D}" install
 }
